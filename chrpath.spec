@@ -4,7 +4,7 @@
 #
 Name     : chrpath
 Version  : 0.16
-Release  : 6
+Release  : 7
 URL      : https://alioth.debian.org/frs/download.php/latestfile/813/chrpath-0.16.tar.gz
 Source0  : https://alioth.debian.org/frs/download.php/latestfile/813/chrpath-0.16.tar.gz
 Summary  : No detailed summary available
