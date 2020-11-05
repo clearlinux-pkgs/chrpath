@@ -1,5 +1,5 @@
 PKG_NAME := chrpath
-URL = https://alioth-archive.debian.org/releases/chrpath/chrpath/0.16/chrpath-0.16.tar.gz
+URL = https://mirrors.kernel.org/debian/pool/main/c/chrpath/chrpath_0.16.orig.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common

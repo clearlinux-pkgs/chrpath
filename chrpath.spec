@@ -4,9 +4,9 @@
 #
 Name     : chrpath
 Version  : 0.16
-Release  : 9
-URL      : https://alioth-archive.debian.org/releases/chrpath/chrpath/0.16/chrpath-0.16.tar.gz
-Source0  : https://alioth-archive.debian.org/releases/chrpath/chrpath/0.16/chrpath-0.16.tar.gz
+Release  : 10
+URL      : https://mirrors.kernel.org/debian/pool/main/c/chrpath/chrpath_0.16.orig.tar.gz
+Source0  : https://mirrors.kernel.org/debian/pool/main/c/chrpath/chrpath_0.16.orig.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -26,7 +26,6 @@ missing.
 Summary: bin components for the chrpath package.
 Group: Binaries
 Requires: chrpath-license = %{version}-%{release}
-Requires: chrpath-man = %{version}-%{release}
 
 %description bin
 bin components for the chrpath package.
@@ -50,29 +49,35 @@ man components for the chrpath package.
 
 %prep
 %setup -q -n chrpath-0.16
+cd %{_builddir}/chrpath-0.16
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1540234348
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1604538378
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1540234348
+export SOURCE_DATE_EPOCH=1604538378
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/chrpath
-cp COPYING %{buildroot}/usr/share/package-licenses/chrpath/COPYING
-cp deb/copyright %{buildroot}/usr/share/package-licenses/chrpath/deb_copyright
+cp %{_builddir}/chrpath-0.16/COPYING %{buildroot}/usr/share/package-licenses/chrpath/68c94ffc34f8ad2d7bfae3f5a6b996409211c1b1
+cp %{_builddir}/chrpath-0.16/deb/copyright %{buildroot}/usr/share/package-licenses/chrpath/b55b3d88e15e1b39bab8d2537cba28aa7b84e27c
 %make_install
 
 %files
@@ -90,8 +95,8 @@ cp deb/copyright %{buildroot}/usr/share/package-licenses/chrpath/deb_copyright
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/chrpath/COPYING
-/usr/share/package-licenses/chrpath/deb_copyright
+/usr/share/package-licenses/chrpath/68c94ffc34f8ad2d7bfae3f5a6b996409211c1b1
+/usr/share/package-licenses/chrpath/b55b3d88e15e1b39bab8d2537cba28aa7b84e27c
 
 %files man
 %defattr(0644,root,root,0755)
