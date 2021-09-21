@@ -1,0 +1,22 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Patrick McCarty <patrick.mccarty@intel.com>
+Date: Mon, 20 Sep 2021 23:09:19 -0700
+Subject: [PATCH] Use docdir from configure
+
+Signed-off-by: Patrick McCarty <patrick.mccarty@intel.com>
+---
+ Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index b50ad21..71f7d5b 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,6 +1,6 @@
+ SUBDIRS = testsuite deb
+ 
+-docdir = $(prefix)/doc/$(PACKAGE)-$(VERSION)
++docdir = @docdir@
+ 
+ doc_DATA = AUTHORS COPYING ChangeLog INSTALL NEWS README
+ 

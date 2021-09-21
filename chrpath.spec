@@ -4,7 +4,7 @@
 #
 Name     : chrpath
 Version  : 0.16
-Release  : 10
+Release  : 11
 URL      : https://mirrors.kernel.org/debian/pool/main/c/chrpath/chrpath_0.16.orig.tar.gz
 Source0  : https://mirrors.kernel.org/debian/pool/main/c/chrpath/chrpath_0.16.orig.tar.gz
 Summary  : No detailed summary available
@@ -13,6 +13,14 @@ License  : GPL-2.0
 Requires: chrpath-bin = %{version}-%{release}
 Requires: chrpath-license = %{version}-%{release}
 Requires: chrpath-man = %{version}-%{release}
+BuildRequires : automake
+BuildRequires : automake-dev
+BuildRequires : gettext-bin
+BuildRequires : libtool
+BuildRequires : libtool-dev
+BuildRequires : m4
+BuildRequires : pkg-config-dev
+Patch1: 0001-Use-docdir-from-configure.patch
 
 %description
 chrpath
@@ -29,6 +37,15 @@ Requires: chrpath-license = %{version}-%{release}
 
 %description bin
 bin components for the chrpath package.
+
+
+%package doc
+Summary: doc components for the chrpath package.
+Group: Documentation
+Requires: chrpath-man = %{version}-%{release}
+
+%description doc
+doc components for the chrpath package.
 
 
 %package license
@@ -50,19 +67,20 @@ man components for the chrpath package.
 %prep
 %setup -q -n chrpath-0.16
 cd %{_builddir}/chrpath-0.16
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604538378
+export SOURCE_DATE_EPOCH=1632204616
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
 export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
-%configure --disable-static
+%reconfigure --disable-static
 make  %{?_smp_mflags}
 
 %check
@@ -73,7 +91,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1604538378
+export SOURCE_DATE_EPOCH=1632204616
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/chrpath
 cp %{_builddir}/chrpath-0.16/COPYING %{buildroot}/usr/share/package-licenses/chrpath/68c94ffc34f8ad2d7bfae3f5a6b996409211c1b1
@@ -82,16 +100,14 @@ cp %{_builddir}/chrpath-0.16/deb/copyright %{buildroot}/usr/share/package-licens
 
 %files
 %defattr(-,root,root,-)
-/usr/doc/chrpath-0.16/AUTHORS
-/usr/doc/chrpath-0.16/COPYING
-/usr/doc/chrpath-0.16/ChangeLog
-/usr/doc/chrpath-0.16/INSTALL
-/usr/doc/chrpath-0.16/NEWS
-/usr/doc/chrpath-0.16/README
 
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/chrpath
+
+%files doc
+%defattr(0644,root,root,0755)
+%doc /usr/share/doc/chrpath/*
 
 %files license
 %defattr(0644,root,root,0755)
