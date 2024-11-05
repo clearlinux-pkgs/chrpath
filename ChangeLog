@@ -1,3 +1,18 @@
+chrpath (0.16-2) unstable; urgency=medium
+
+  * Handle DT_MIPS_RLD_MAP_REL on MIPS.  Thanks to Aurelien Jarno for the
+    patch.  Closes: #820335.
+
+ -- Tollef Fog Heen <tfheen@debian.org>  Sat, 09 Apr 2016 10:20:53 +0200
+
+chrpath (0.16-1) unstable; urgency=low
+
+  * New upstream release.
+  * Add link to homepage in control file.  Closes: #730232
+  * Update Standards-Version. No changes needed.
+
+ -- Tollef Fog Heen <tfheen@debian.org>  Sun, 19 Jan 2014 19:12:01 +0100
+
 chrpath (0.14-3) unstable; urgency=low
 
   * Fix syntax error (Close → Closes) in 0.14-1 changelog entry.

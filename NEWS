@@ -1,3 +1,14 @@
+New in 0.18 released 2024-10-31:
+ * Adjusted package metadata slightly.
+
+New in 0.17 released 2023-11-10:
+ * Moved project to Codeberg, as Alioth is shut down.
+ * Add Solaris support (use <sys/byteorder.h> instead of <byteswap.h>).
+   Patch from Rainer Orth.
+ * Added missing newline from printf() line.  Patch from Frank Dana.
+ * Corrected handling of multiple ELF sections. Patch from Frank Dana.
+ * Updated build rules for .deb.  Partly based on patch from djcj.
+
 New in 0.16 released 2014-01-14:
  * Fixed all minor bugs discovered by Coverity.
  * Updated config.sub and config.guess from the GNU project.
